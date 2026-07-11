@@ -15,7 +15,7 @@ header {
   gap: .75rem;
 }
 header img { height: 40px; }
-header img.logo-round { height: 80px; width: 120px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.5); }
+header img.logo-round { height: 48px; width: 48px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.5); }
 header .store-name { font-weight: 700; font-size: 1.1rem; }
 header .slogan { font-size: .8rem; opacity: .85; }
 
@@ -51,8 +51,8 @@ header .slogan { font-size: .8rem; opacity: .85; }
 
 #productGrid, #similaresGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; padding: 1.5rem; }
 .product-card { border: 1px solid #e5e7eb; border-radius: .6rem; overflow: hidden; background: white; }
-.product-card .img-wrap { position: relative; overflow: hidden; height: 140px; }
-.product-card .img-wrap img { width: 100%; height: 140px; object-fit: cover; display: block; }
+.product-card .img-wrap { position: relative; overflow: hidden; height: 140px; background: #f1f5f9; }
+.product-card .img-wrap img { width: 100%; height: 140px; object-fit: contain; display: block; }
 .product-card .img-wrap::after {
   content: '';
   position: absolute; inset: 0;
@@ -119,8 +119,8 @@ footer a { color: #d1d5db; }
   display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem;
   padding: 1.5rem; max-width: 900px; margin: 0 auto;
 }
-.product-detail .img-wrap { position: relative; overflow: hidden; border-radius: .6rem; }
-.product-detail .img-wrap img { width: 100%; height: 280px; object-fit: cover; display: block; }
+.product-detail .img-wrap { position: relative; overflow: hidden; border-radius: .6rem; background: #f1f5f9; }
+.product-detail .img-wrap img { width: 100%; height: 280px; object-fit: contain; display: block; }
 .product-detail .img-wrap::after {
   content: '';
   position: absolute; inset: 0;

@@ -62,7 +62,12 @@ async function cargarProductos() {
     }
   }
 }
-cargarProductos();
+// Guardamos la PROMESA (no solo llamamos la función) para poder esperarla
+// desde cualquier ruta. Esto evita que, en un arranque "en frío" (Vercel
+// apaga el servidor si nadie lo usa y lo prende de nuevo en la próxima
+// visita), un pedido llegue y se responda con la lista todavía vacía
+// mientras la carga real sigue en curso de fondo.
+let productosListos = cargarProductos();
 
 // ─── Categorías (el admin las crea desde el panel) ────────────────────────
 let categorias = [];
@@ -94,7 +99,7 @@ async function cargarCategorias() {
     categorias = storeConfig.categoriasIniciales || [];
   }
 }
-cargarCategorias();
+let categoriasListas = cargarCategorias();
 
 function slugify(texto) {
   return texto
@@ -106,7 +111,8 @@ function slugify(texto) {
 }
 
 // ─── Config pública (la usan index.html / search.html / admin.html) ──────
-app.get('/api/config', (req, res) => {
+app.get('/api/config', async (req, res) => {
+  await categoriasListas;
   res.json({ ...storeConfig.public(), categorias });
 });
 
@@ -114,22 +120,31 @@ app.get('/api/config', (req, res) => {
 // Público: solo lo disponible. Si no hay inventario, el admin lo oculta con
 // el interruptor "disponible" en vez de borrarlo — así el producto sigue
 // existiendo en la base de datos y no hay que recrearlo cuando vuelva a haber stock.
-app.get('/api/products', (req, res) => res.json(productos.filter((p) => p.disponible)));
+app.get('/api/products', async (req, res) => {
+  await productosListos;
+  res.json(productos.filter((p) => p.disponible));
+});
 
 // Admin: todo el catálogo (disponible y no disponible), para el dashboard y la edición.
-app.get('/api/admin/products', verifyAdmin, (req, res) => res.json(productos));
+app.get('/api/admin/products', verifyAdmin, async (req, res) => {
+  await productosListos;
+  res.json(productos);
+});
 
-app.get('/api/products/:id', (req, res) => {
+app.get('/api/products/:id', async (req, res) => {
+  await productosListos;
   const producto = productos.find((p) => p.id === parseInt(req.params.id, 10));
   if (!producto) return res.status(404).json({ message: 'Producto no encontrado' });
   res.json(producto);
 });
 
-app.get('/api/categories', (req, res) => {
+app.get('/api/categories', async (req, res) => {
+  await productosListos;
   res.json([...new Set(productos.map((p) => p.categoria))]);
 });
 
-app.get('/api/subcategories/:category', (req, res) => {
+app.get('/api/subcategories/:category', async (req, res) => {
+  await productosListos;
   const subcategorias = [...new Set(
     productos.filter((p) => p.categoria === req.params.category).map((p) => p.subcategoria)
   )];
@@ -262,6 +277,7 @@ app.post('/api/admin/categories', verifyAdmin, async (req, res) => {
   if (!supabaseService) {
     return res.status(500).json({ error: 'SUPABASE_SERVICE_ROLE no configurado en esta tienda' });
   }
+  await categoriasListas;
   const { nombre } = req.body;
   if (!nombre || !nombre.trim()) {
     return res.status(400).json({ error: 'El nombre de la categoría es obligatorio' });

@@ -29,20 +29,20 @@ function parseCategories(raw) {
 }
 
 export const storeConfig = {
-  nombre: process.env.STORE_NAME || 'Quiroga Express',
-  slug: process.env.STORE_SLUG || 'Quiroga Express',
-  slogan: process.env.STORE_SLOGAN || 'Lo que necesitas, más cerca de ti',
+  nombre: process.env.STORE_NAME || 'Mi Tienda',
+  slug: process.env.STORE_SLUG || 'mi-tienda',
+  slogan: process.env.STORE_SLOGAN || '',
   logo: process.env.STORE_LOGO_PATH || '/logo.png',
   colores: {
-    primario: process.env.STORE_COLOR_PRIMARY || '#2a077a',
+    primario: process.env.STORE_COLOR_PRIMARY || '#0f766e',
     acento: process.env.STORE_COLOR_ACCENT || '#f59e0b',
   },
-  whatsapp: process.env.STORE_WHATSAPP || '5352475232',
-  email: process.env.STORE_EMAIL || 'quirogaalexo@yandex.com',
+  whatsapp: process.env.STORE_WHATSAPP || '',
+  email: process.env.STORE_EMAIL || '',
   facebook: process.env.STORE_FACEBOOK || '',
   direccion: process.env.STORE_ADDRESS || '',
   horario: process.env.STORE_SCHEDULE || '',
-  mostrarTasaCambio: (process.env.STORE_SHOW_EXCHANGE_RATE || 'true').toLowerCase() === 'true',
+  mostrarTasaCambio: (process.env.STORE_SHOW_EXCHANGE_RATE || 'false').toLowerCase() === 'true',
 
   // Solo se usa UNA vez, para poblar la tabla `categorias` de Supabase la
   // primera vez que la tienda arranca y esa tabla está vacía. Después de eso,
