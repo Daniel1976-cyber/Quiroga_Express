@@ -34,7 +34,7 @@ export const storeConfig = {
   slogan: process.env.STORE_SLOGAN || '',
   logo: process.env.STORE_LOGO_PATH || '/logo.png',
   colores: {
-    primario: process.env.STORE_COLOR_PRIMARY || '#0f766e',
+    primario: process.env.STORE_COLOR_PRIMARY || '#531badff',
     acento: process.env.STORE_COLOR_ACCENT || '#f59e0b',
   },
   whatsapp: process.env.STORE_WHATSAPP || '',
