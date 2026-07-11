@@ -29,16 +29,16 @@ function parseCategories(raw) {
 }
 
 export const storeConfig = {
-  nombre: process.env.STORE_NAME || 'Mi Tienda',
-  slug: process.env.STORE_SLUG || 'mi-tienda',
-  slogan: process.env.STORE_SLOGAN || '',
+  nombre: process.env.STORE_NAME || 'Quiroga Express',
+  slug: process.env.STORE_SLUG || 'Quiroga Express',
+  slogan: process.env.STORE_SLOGAN || 'Lo que necesitas, más cerca de ti',
   logo: process.env.STORE_LOGO_PATH || '/logo.png',
   colores: {
     primario: process.env.STORE_COLOR_PRIMARY || '#531badff',
     acento: process.env.STORE_COLOR_ACCENT || '#f59e0b',
   },
-  whatsapp: process.env.STORE_WHATSAPP || '',
-  email: process.env.STORE_EMAIL || '',
+  whatsapp: process.env.STORE_WHATSAPP || '5352475232',
+  email: process.env.STORE_EMAIL || 'quirogaalexo@yandex.com',
   facebook: process.env.STORE_FACEBOOK || '',
   direccion: process.env.STORE_ADDRESS || '',
   horario: process.env.STORE_SCHEDULE || '',
