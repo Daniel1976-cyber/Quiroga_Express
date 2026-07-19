@@ -1,20 +1,30 @@
 :root {
   --color-primario: #0f766e;
   --color-acento: #f59e0b;
+  --header-gradiente: var(--color-primario);
+  --fuente-titulo: inherit;
+  --fuente-cuerpo: system-ui, sans-serif;
 }
 
 * {
   box-sizing: border-box;
 }
 
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: var(--fuente-cuerpo);
   color: #1f2937;
 }
 
 header {
-  background: var(--color-primario);
+  background: var(--header-gradiente);
   color: white;
   padding: 1rem 1.5rem;
   display: flex;
@@ -27,8 +37,8 @@ header img {
 }
 
 header img.logo-round {
-  height: 80px;
-  width: 120px;
+  height: 100px;
+  width: 140px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(255, 255, 255, .5);
@@ -37,6 +47,7 @@ header img.logo-round {
 header .store-name {
   font-weight: 700;
   font-size: 1.1rem;
+  font-family: var(--fuente-titulo);
 }
 
 header .slogan {
