@@ -21,10 +21,7 @@
       <input id="searchText" type="text" placeholder="Buscar producto..." autocomplete="off" />
       <div id="searchSuggestions" class="search-suggestions"></div>
     </div>
-    <select id="searchCategory">
-      <option value="">Todas las categorías</option>
-    </select>
-    <button type="submit">Buscar</button>
+    <button type="submit" class="search-icon-btn" aria-label="Buscar">🔍</button>
   </form>
 
   <div id="categoryButtons"></div>
@@ -68,15 +65,6 @@
 
     (async function start() {
       const config = await StoreApp.initStore();
-
-      // Poblar el <select> del buscador con las categorías de la config
-      const select = document.getElementById('searchCategory');
-      config.categorias.forEach((c) => {
-        const opt = document.createElement('option');
-        opt.value = c.id;
-        opt.textContent = c.nombre;
-        select.appendChild(opt);
-      });
 
       document.getElementById('categoryButtons').addEventListener('click', (e) => {
         if (!e.target.matches('.cat-btn')) return;

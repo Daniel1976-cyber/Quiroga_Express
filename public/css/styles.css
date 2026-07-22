@@ -92,6 +92,13 @@ header .slogan {
   cursor: pointer;
 }
 
+.search-icon-btn {
+  flex-shrink: 0;
+  width: 42px;
+  padding: 0 !important;
+  font-size: 1.05rem;
+}
+
 .search-suggestions {
   position: absolute;
   top: calc(100% + 4px);
