@@ -30,7 +30,7 @@ function parseCategories(raw) {
 
 export const storeConfig = {
   nombre: process.env.STORE_NAME || 'Quiroga Express',
-  slug: process.env.STORE_SLUG || 'mi-tienda',
+  slug: process.env.STORE_SLUG || 'Quiroga Express',
   slogan: process.env.STORE_SLOGAN || '',
   logo: process.env.STORE_LOGO_PATH || '/logo.png',
   colores: {
