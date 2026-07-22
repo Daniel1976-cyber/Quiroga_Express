@@ -21,10 +21,7 @@
       <input id="searchText" type="text" placeholder="Buscar producto..." autocomplete="off" />
       <div id="searchSuggestions" class="search-suggestions"></div>
     </div>
-    <select id="searchCategory">
-      <option value="">Todas las categorías</option>
-    </select>
-    <button type="submit">Buscar</button>
+    <button type="submit" class="search-icon-btn" aria-label="Buscar">🔍</button>
   </form>
 
   <div style="padding: 0 1.5rem; margin-top: 1rem;">
@@ -56,8 +53,7 @@
 
     function buscarYRender() {
       const q = document.getElementById('searchText').value.trim();
-      const cat = document.getElementById('searchCategory').value;
-      window.location.href = StoreApp.buildSearchUrl(q, cat);
+      window.location.href = StoreApp.buildSearchUrl(q, '');
     }
 
     function mostrarResultados(q, cat) {
@@ -116,14 +112,6 @@
     (async function start() {
       const config = await StoreApp.initStore();
 
-      const select = document.getElementById('searchCategory');
-      config.categorias.forEach((c) => {
-        const opt = document.createElement('option');
-        opt.value = c.id;
-        opt.textContent = c.nombre;
-        select.appendChild(opt);
-      });
-
       productosCache = await fetch('/api/products').then((r) => r.json());
 
       StoreApp.setupAutocomplete(
@@ -137,8 +125,6 @@
       const id = params.get('id');
       const q = params.get('q') || '';
       const cat = params.get('cat') || '';
-
-      document.getElementById('searchCategory').value = cat;
 
       if (id) {
         mostrarDetalle(parseInt(id, 10));
